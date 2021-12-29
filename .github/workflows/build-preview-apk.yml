@@ -1,11 +1,11 @@
 name: build-preview-apk
 on: [push]
+env:
+  expo_password: ${{ secrets.PASSWORD }}
 jobs:
   build-android-apk:
     runs-on: ubuntu-latest
     steps:
-      env: # Or as an environment variable
-        expo_password: ${{ secrets.PASSWORD }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
