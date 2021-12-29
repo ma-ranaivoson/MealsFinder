@@ -1,7 +1,8 @@
 name: build-preview-apk
 on: [push]
 env:
-  expo_password: ${{ secrets.PASSWORD }}
+  expo_password: ${{ secrets.EXPO_PASSWORD }}
+  expo_login: rv.nirmalala@gmail.com
 jobs:
   build-android-apk:
     runs-on: ubuntu-latest
@@ -15,4 +16,4 @@ jobs:
       - run: npm install --global yarn
       - run: yarn install
       - run: echo $expo_password
-      - run: expo login
+      - run: expo login -u $expo_login -p $expo_password
