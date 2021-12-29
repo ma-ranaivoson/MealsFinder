@@ -17,3 +17,4 @@ jobs:
       - run: yarn install
       - run: echo $expo_password
       - run: expo login -u $expo_login -p $expo_password
+      - run: eas build -p android --profile preview
