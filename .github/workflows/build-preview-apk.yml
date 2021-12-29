@@ -1,9 +1,11 @@
-name: github-actions
+name: build-preview-apk
 on: [push]
 jobs:
   build-android-apk:
     runs-on: ubuntu-latest
     steps:
+      env: # Or as an environment variable
+        expo_password: ${{ secrets.PASSWORD }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -12,4 +14,5 @@ jobs:
       - run: npm install -g eas-cli
       - run: npm install --global yarn
       - run: yarn install
-      - run: eas build -p android --profile preview
+      - run: echo $expo_password
+      - run: expo
