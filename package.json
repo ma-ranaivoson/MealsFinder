@@ -12,6 +12,10 @@
   "dependencies": {
     "@expo-google-fonts/lato": "^0.2.0",
     "@expo-google-fonts/oswald": "^0.2.0",
+    "@expo/vector-icons": "^12.0.5",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
     "expo-splash-screen": "~0.14.1",
@@ -20,12 +24,15 @@
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-paper": "^4.11.1",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@types/expo__vector-icons": "^10.0.0",
     "@types/react-native": "^0.66.10",
     "@types/styled-components": "^5.1.19",
     "@types/styled-components-react-native": "^5.1.3",
