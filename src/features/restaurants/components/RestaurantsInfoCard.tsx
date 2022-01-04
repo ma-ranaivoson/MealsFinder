@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
 import star from '../../../../assets/star';
 import open from '../../../../assets/open';
+import TextTypo from '../../../components/typography/Text';
 
 interface Restaurant {
   name: string;
@@ -22,17 +23,12 @@ interface Props {
 
 const RestaurantCard = styled(Card)`
   background-color: white;
+  margin-bottom: 16px;
 `;
 
 const RestaurantCardCover = styled(Card.Cover)`
   padding: ${({ theme }) => theme.Spacing.space[3]};
   background-color: white;
-`;
-
-const Title = styled.Text`
-  font-family: ${({ theme }) => theme.Font.fonts.heading};
-  font-size: ${({ theme }) => theme.Font.fontSizes.body};
-  color: ${(props) => props.theme.Color.text.primary};
 `;
 
 const Info = styled.View`
@@ -56,6 +52,7 @@ const Rate = styled.View`
 `;
 const Open = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export default function RestaurantInfoCard({
@@ -79,7 +76,7 @@ export default function RestaurantInfoCard({
     <RestaurantCard elevation={6}>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
-        <Title>{name}</Title>
+        <TextTypo variant="label">{name}</TextTypo>
         <Rating>
           <Rate>
             {ratingArray.map((elem) => (
@@ -88,9 +85,9 @@ export default function RestaurantInfoCard({
           </Rate>
           <Open>
             {isClosedTemporarly && (
-              <Text style={{ color: 'red', paddingLeft: 16, paddingRight: 16 }}>
+              <TextTypo variant="error" style={{ paddingRight: 16 }}>
                 CLOSED TEMPORARILY
-              </Text>
+              </TextTypo>
             )}
             {isOpenNow && (
               <SvgXml

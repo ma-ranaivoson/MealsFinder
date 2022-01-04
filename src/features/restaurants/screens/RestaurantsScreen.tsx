@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Platform,
   StatusBar,
+  FlatList,
 } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
@@ -42,9 +43,12 @@ export default function RestaurantsScreen() {
           value={searchQuery}
         />
       </View>
-      <View style={styles.list}>
-        <RestaurantInfoCard />
-      </View>
+      <FlatList
+        data={[{ name: 'test' }, { name: 'test 2' }, { name: 'test 3' }]}
+        renderItem={() => <RestaurantInfoCard />}
+        keyExtractor={(item) => item.name}
+        contentContainerStyle={{ padding: 16 }}
+      />
     </SafeAreaView>
   );
 }
