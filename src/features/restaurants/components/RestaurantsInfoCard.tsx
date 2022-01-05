@@ -7,14 +7,14 @@ import star from '../../../../assets/star';
 import open from '../../../../assets/open';
 import TextTypo from '../../../components/typography/Text';
 
-interface Restaurant {
+export interface Restaurant {
   name: string;
   icon: string;
   photos: string[];
   address: string;
   isOpenNow: boolean;
   rating: number;
-  isClosedTemporarly: boolean;
+  isClosedTemporarily: boolean;
 }
 
 interface Props {
@@ -65,7 +65,7 @@ export default function RestaurantInfoCard({
       'https://media.gettyimages.com/photos/cozy-restaurant-for-gathering-with-friends-picture-id1159992039?s=612x612',
     ],
     address = '100 Some random street',
-    isClosedTemporarly = true,
+    isClosedTemporarily = true,
     isOpenNow = false,
     rating = 5,
   } = restaurant;
@@ -84,7 +84,7 @@ export default function RestaurantInfoCard({
             ))}
           </Rate>
           <Open>
-            {isClosedTemporarly && (
+            {isClosedTemporarily && (
               <TextTypo variant="error" style={{ paddingRight: 16 }}>
                 CLOSED TEMPORARILY
               </TextTypo>
@@ -97,7 +97,7 @@ export default function RestaurantInfoCard({
                 style={{ paddingLeft: 16 }}
               />
             )}
-            {isClosedTemporarly && (
+            {isClosedTemporarily && (
               <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
             )}
           </Open>

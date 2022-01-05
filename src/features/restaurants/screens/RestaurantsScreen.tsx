@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components/native';
-import {
-  StyleSheet,
-  View,
-  Platform,
-  StatusBar,
-  FlatList,
-} from 'react-native';
+// eslint-disable-next-line object-curly-newline
+import { StyleSheet, View, Platform, StatusBar, FlatList } from 'react-native';
 import { Searchbar } from 'react-native-paper';
+import Loader from '../../../components/loader/Loader';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
 import SafeArea from '../../../components/utility/SafeArea';
+import { RestaurantContext } from '../../../services/restaurants/restaurant.context';
 
 const isAndroid = Platform.OS === 'android';
 
@@ -32,6 +29,7 @@ const RestaurantList = styled(FlatList).attrs({
 
 export default function RestaurantsScreen() {
   const [searchQuery, setSearchQuery] = useState('');
+  const { isLoading, error, restaurants } = useContext(RestaurantContext);
 
   const onChangeSearch = (text: string) => {
     setSearchQuery(text);
@@ -46,11 +44,19 @@ export default function RestaurantsScreen() {
           value={searchQuery}
         />
       </View>
-      <RestaurantList
-        data={[{ name: 'test' }, { name: 'test 2' }, { name: 'test 3' }]}
-        renderItem={() => <RestaurantInfoCard />}
-        keyExtractor={(item: any) => item.name}
-      />
+      {isLoading ? (
+        <Loader size="large" />
+      ) : (
+        <RestaurantList
+          data={restaurants}
+          // eslint-disable-next-line react/no-unused-prop-types
+          renderItem={({ item }: { item: any }) => {
+            console.log(item);
+            return <RestaurantInfoCard restaurant={item} />;
+          }}
+          keyExtractor={(item: any) => item.name}
+        />
+      )}
     </SafeArea>
   );
 }
