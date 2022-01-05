@@ -50,10 +50,9 @@ export default function RestaurantsScreen() {
         <RestaurantList
           data={restaurants}
           // eslint-disable-next-line react/no-unused-prop-types
-          renderItem={({ item }: { item: any }) => {
-            console.log(item);
-            return <RestaurantInfoCard restaurant={item} />;
-          }}
+          renderItem={({ item }: { item: any }) => (
+            <RestaurantInfoCard restaurant={item} />
+          )}
           keyExtractor={(item: any) => item.name}
         />
       )}

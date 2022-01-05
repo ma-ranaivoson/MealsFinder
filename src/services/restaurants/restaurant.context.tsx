@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-newline */
-import React, { useState, useEffect, createContext, useMemo } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { restaurantRequest, restaurantTransform } from './restaurant.service';
 
 interface Props {
@@ -7,9 +7,9 @@ interface Props {
 }
 
 interface Context {
-  restaurants: number[];
+  restaurants: string | [];
   isLoading: boolean;
-  error: string;
+  error: string | null;
 }
 
 export const RestaurantContext = createContext<Context>({
@@ -44,6 +44,7 @@ export function RestaurantContextProvider({ children }: Props) {
   }, []);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <RestaurantContext.Provider value={{ restaurants, isLoading, error }}>
       {children}
     </RestaurantContext.Provider>
