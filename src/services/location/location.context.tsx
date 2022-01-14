@@ -17,7 +17,7 @@ interface Location {
 interface LocationCtx {
   isLoading: boolean;
   error: string | null;
-  location: Location | null;
+  location: Location | null | any;
   // eslint-disable-next-line no-unused-vars
   search: (a: string) => void;
   keyword: string;

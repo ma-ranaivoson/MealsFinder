@@ -16,7 +16,7 @@ export default function RestaurantDetailScreen({ route }: any) {
   return (
     <SafeArea>
       <RestaurantInfoCard restaurant={restaurant} />
-      <ScrollView overScrollMode="never">
+      <ScrollView overScrollMode="never" style={{ marginTop: -20 }}>
         <List.Accordion
           title="Breakfast"
           left={() => (

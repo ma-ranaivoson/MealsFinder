@@ -8,7 +8,7 @@ interface Props {
 }
 
 interface Context {
-  restaurants: string | [];
+  restaurants: object[];
   isLoading: boolean;
   error: string | null;
 }
@@ -20,7 +20,7 @@ export const RestaurantContext = createContext<Context>({
 });
 
 export function RestaurantContextProvider({ children }: Props) {
-  const [restaurants, setRestaurants] = useState<[] | string>([]);
+  const [restaurants, setRestaurants] = useState<object[] | any>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 

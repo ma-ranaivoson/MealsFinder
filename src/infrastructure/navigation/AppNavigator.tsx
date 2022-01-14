@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableHighlight } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { ParamListBase } from '@react-navigation/routers';
@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SafeArea from '../../components/utility/SafeArea';
 import RestaurantsNavigator from './RestaurantsNavigator';
+import MapScreen from '../../features/map/screens/MapScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,14 +19,6 @@ const Setting = function () {
   return (
     <SafeArea>
       <Text>Setting</Text>
-    </SafeArea>
-  );
-};
-// eslint-disable-next-line func-names
-const Map = function () {
-  return (
-    <SafeArea>
-      <Text>Map</Text>
     </SafeArea>
   );
 };
@@ -51,6 +44,10 @@ const screenOptions = ({
   tabBarActiveTintColor: 'tomato',
   tabBarInactiveTintColor: 'gray',
   headerShown: false,
+  tabBarButton: (props: any) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <TouchableHighlight {...props} underlayColor="tomato" />
+  ),
 });
 
 export default function AppNavigator() {
@@ -58,7 +55,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Map" component={Map} />
+        <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Setting" component={Setting} />
       </Tab.Navigator>
     </NavigationContainer>
