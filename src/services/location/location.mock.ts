@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
-export const locations = {
-  antwerp: {
+export const locations = [
+  {
+    name: 'antwerp',
     results: [
       {
         geometry: {
@@ -22,7 +23,8 @@ export const locations = {
       },
     ],
   },
-  'san francisco': {
+  {
+    name: 'san francisco',
     results: [
       {
         geometry: {
@@ -36,7 +38,8 @@ export const locations = {
     ],
     status: 'OK',
   },
-  chicago: {
+  {
+    name: 'chicago',
     results: [
       {
         geometry: {
@@ -58,7 +61,8 @@ export const locations = {
       },
     ],
   },
-  toronto: {
+  {
+    name: 'toronto',
     results: [
       {
         geometry: {
@@ -80,4 +84,4 @@ export const locations = {
       },
     ],
   },
-};
+];

@@ -1,5 +1,6 @@
 /* eslint-disable object-curly-newline */
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { LocationContext } from '../location/location.context';
 import { restaurantRequest, restaurantTransform } from './restaurant.service';
 
 interface Props {
@@ -23,10 +24,12 @@ export function RestaurantContextProvider({ children }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const retreiveRestaurants = () => {
+  const { location } = useContext(LocationContext);
+
+  const retreiveRestaurants = (loc: string) => {
     setIsLoading(true);
     setTimeout(() => {
-      restaurantRequest()
+      restaurantRequest(loc)
         .then(restaurantTransform)
         .then((res) => {
           setIsLoading(false);
@@ -40,8 +43,9 @@ export function RestaurantContextProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    retreiveRestaurants();
-  }, []);
+    const locationString = `${location?.lat},${location?.lng}`;
+    retreiveRestaurants(locationString);
+  }, [location]);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values

@@ -2,8 +2,9 @@ import { mocks, mockImages } from './mock';
 
 const camelize = require('camelize');
 
-export function restaurantRequest(location = '37.7749295,-122.4194155') {
+export function restaurantRequest(location: string) {
   return new Promise((resolve, reject) => {
+    // @ts-ignore: Unreachable code error
     const mock = mocks[location];
 
     // eslint-disable-next-line prefer-promise-reject-errors
@@ -25,6 +26,7 @@ export function restaurantTransform({
 
     return {
       ...restaurant,
+      address: restaurant.vicinity,
       isOpenNow: restaurant.opening_hours && restaurant.opening_hours.open_now,
       isClosedTemporarily: restaurant.business_status === 'CLOSED_TEMPORARILY',
     };

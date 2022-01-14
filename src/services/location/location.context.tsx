@@ -1,5 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { locationRequest, locationTransform } from './location.service';
+import {
+  locationRequest,
+  locationTransform,
+  LocationType,
+} from './location.service';
 
 interface Props {
   children: React.ReactNode;
@@ -15,7 +19,7 @@ interface LocationCtx {
   error: string | null;
   location: Location | null;
   // eslint-disable-next-line no-unused-vars
-  search?: (a: string) => void;
+  search: (a: string) => void;
   keyword: string;
 }
 
@@ -29,16 +33,22 @@ export const LocationContext = createContext<LocationCtx>({
 
 export function LocationContextProvider({ children }: Props) {
   const [location, setLocation] = useState<Location | null>(null);
-  const [keyword, setKeyword] = useState<string>('san francisco');
+  const [keyword, setKeyword] = useState<string>('San Francisco');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const onSearch = (searchKeyword: string) => {
     setIsLoading(true);
     setKeyword(searchKeyword);
-    locationRequest(keyword)
-      // @ts-ignore: Unreachable code error
-      .then(locationTransform)
+
+    if (!searchKeyword.length) return;
+
+    locationRequest(searchKeyword.toLowerCase())
+      .then((res) => {
+        const loc = res as LocationType;
+        const locTransformed = locationTransform(loc);
+        return locTransformed;
+      })
       .then((res) => {
         setLocation(res);
         setIsLoading(false);

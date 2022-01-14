@@ -15,6 +15,7 @@ export interface Restaurant {
   isOpenNow: boolean;
   rating: number;
   isClosedTemporarily: boolean;
+  placeId: string;
 }
 
 interface Props {
@@ -68,6 +69,7 @@ export default function RestaurantInfoCard({
     isClosedTemporarily = true,
     isOpenNow = false,
     rating = 5,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -79,8 +81,9 @@ export default function RestaurantInfoCard({
         <TextTypo variant="label">{name}</TextTypo>
         <Rating>
           <Rate>
-            {ratingArray.map((elem) => (
-              <SvgXml key={elem} xml={star} width={20} height={20} />
+            {ratingArray.map((_, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <SvgXml key={`star-${placeId}-${i}`} xml={star} width={20} height={20} />
             ))}
           </Rate>
           <Open>
