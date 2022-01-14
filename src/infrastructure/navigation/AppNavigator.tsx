@@ -45,7 +45,7 @@ const screenOptions = ({
     } else if (route.name === 'Map') {
       iconName = 'md-map';
     }
-
+    // @ts-ignore: Unreachable code error
     return <Ionicons name={iconName} size={size} color={color} />;
   },
   tabBarActiveTintColor: 'tomato',

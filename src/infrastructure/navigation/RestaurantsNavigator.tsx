@@ -1,15 +1,28 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from '@react-navigation/stack';
 import RestaurantsScreen from '../../features/restaurants/screens/RestaurantsScreen';
+import RestaurantDetailScreen from '../../features/restaurants/screens/RestaurantDetailScreen';
 
-const RestaurantStack = createNativeStackNavigator();
+const RestaurantStack = createStackNavigator();
 
 export default function RestaurantsNavigator() {
   return (
-    <RestaurantStack.Navigator>
+    <RestaurantStack.Navigator
+      screenOptions={{
+        ...TransitionPresets.RevealFromBottomAndroid,
+      }}
+    >
       <RestaurantStack.Screen
         name="Restaurant"
         component={RestaurantsScreen}
+        options={{ headerShown: false }}
+      />
+      <RestaurantStack.Screen
+        name="RestaurantDetail"
+        component={RestaurantDetailScreen}
         options={{ headerShown: false }}
       />
     </RestaurantStack.Navigator>

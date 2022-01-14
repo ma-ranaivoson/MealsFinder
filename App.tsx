@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 // eslint-disable-next-line camelcase

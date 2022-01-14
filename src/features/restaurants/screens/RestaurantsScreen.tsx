@@ -1,12 +1,23 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
 // eslint-disable-next-line object-curly-newline
-import { StyleSheet, View, Platform, StatusBar, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Platform,
+  StatusBar,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import Search from '../components/Search';
 import Loader from '../../../components/loader/Loader';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
 import SafeArea from '../../../components/utility/SafeArea';
 import { RestaurantContext } from '../../../services/restaurants/restaurant.context';
+
+interface Props {
+  navigation: any;
+}
 
 const isAndroid = Platform.OS === 'android';
 
@@ -31,8 +42,8 @@ const RestaurantList = styled(FlatList).attrs({
   },
 })``;
 
-export default function RestaurantsScreen() {
-  const { isLoading, error, restaurants } = useContext(RestaurantContext);
+export default function RestaurantsScreen({ navigation }: Props) {
+  const { isLoading, restaurants } = useContext(RestaurantContext);
 
   return (
     <SafeArea>
@@ -46,7 +57,11 @@ export default function RestaurantsScreen() {
           data={restaurants}
           // eslint-disable-next-line react/no-unused-prop-types
           renderItem={({ item }: { item: any }) => (
-            <RestaurantInfoCard restaurant={item} />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
+            >
+              <RestaurantInfoCard restaurant={item} />
+            </TouchableOpacity>
           )}
           keyExtractor={(item: any) => item.name}
         />
