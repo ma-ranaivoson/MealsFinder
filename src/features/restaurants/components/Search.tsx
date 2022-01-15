@@ -7,7 +7,13 @@ const SearchContainer = styled.View`
   justify-content: center;
 `;
 
-function Search() {
+function Search({
+  isFavoritesToggled,
+  onFavoritesToggle,
+}: {
+  isFavoritesToggled: boolean;
+  onFavoritesToggle: () => void;
+}) {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -21,10 +27,12 @@ function Search() {
       <Searchbar
         placeholder="Search for a location"
         value={searchKeyword}
+        onIconPress={onFavoritesToggle}
         onSubmitEditing={() => {
           search(searchKeyword);
         }}
         onChangeText={(text) => setSearchKeyword(text)}
+        icon={isFavoritesToggled ? 'heart' : 'heart-outline'}
       />
     </SearchContainer>
   );

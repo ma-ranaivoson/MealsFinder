@@ -14,6 +14,8 @@ import Loader from '../../../components/loader/Loader';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
 import SafeArea from '../../../components/utility/SafeArea';
 import { RestaurantContext } from '../../../services/restaurants/restaurant.context';
+import { FavoriteContext } from '../../../services/favorites/favorites.context';
+import FavoriteBar from '../../../components/favorite/FavoriteBar';
 
 interface Props {
   navigation: any;
@@ -44,12 +46,23 @@ const RestaurantList = styled(FlatList).attrs({
 
 export default function RestaurantsScreen({ navigation }: Props) {
   const { isLoading, restaurants } = useContext(RestaurantContext);
+  const { favorites } = useContext(FavoriteContext);
+  const [isToggled, setIsToggled] = React.useState(false);
 
   return (
     <SafeArea>
       <View style={styles.search}>
-        <Search />
+        <Search
+          isFavoritesToggled={isToggled}
+          onFavoritesToggle={() => setIsToggled(!isToggled)}
+        />
       </View>
+      {isToggled && (
+        <FavoriteBar
+          onNavigate={navigation.navigate}
+          favorites={favorites}
+        />
+      )}
       {isLoading ? (
         <Loader size="large" />
       ) : (
