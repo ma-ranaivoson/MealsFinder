@@ -47,9 +47,17 @@ export function RestaurantContextProvider({ children }: Props) {
     retreiveRestaurants(locationString);
   }, [location]);
 
+  const value = React.useMemo(
+    () => ({
+      restaurants,
+      isLoading,
+      error,
+    }),
+    [restaurants, isLoading, error],
+  );
+
   return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <RestaurantContext.Provider value={{ restaurants, isLoading, error }}>
+    <RestaurantContext.Provider value={value}>
       {children}
     </RestaurantContext.Provider>
   );

@@ -63,17 +63,14 @@ export function LocationContextProvider({ children }: Props) {
     onSearch(keyword);
   }, []);
 
+  const value = React.useMemo(
+    // eslint-disable-next-line object-curly-newline
+    () => ({ isLoading, error, location, search: onSearch, keyword }),
+    [isLoading, error, location, keyword],
+  );
+
   return (
-    <LocationContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      value={{
-        isLoading,
-        error,
-        location,
-        search: onSearch,
-        keyword,
-      }}
-    >
+    <LocationContext.Provider value={value}>
       {children}
     </LocationContext.Provider>
   );
