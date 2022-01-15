@@ -1,4 +1,5 @@
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Restaurant } from '../../features/restaurants/components/RestaurantsInfoCard';
 
 interface FavoriteCtx {
@@ -22,6 +23,26 @@ export function FavoriteContextProvider({
 }) {
   const [favorites, setFavorites] = React.useState<Restaurant[]>([]);
 
+  const saveFavorites = async (value: Restaurant[]) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@favorites', jsonValue);
+    } catch (e) {
+      throw new Error('There is an error while saving favorites');
+    }
+  };
+
+  const loadFavorites = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@favorites');
+      if (value !== null) {
+        setFavorites(JSON.parse(value));
+      }
+    } catch (e) {
+      throw new Error('There is an error while loading favorites');
+    }
+  };
+
   const add = (restaurant: Restaurant) =>
     // eslint-disable-next-line implicit-arrow-linebreak
     setFavorites([...favorites, restaurant]);
@@ -38,10 +59,16 @@ export function FavoriteContextProvider({
     [favorites],
   );
 
+  React.useEffect(() => {
+    loadFavorites();
+  }, []);
+
+  React.useEffect(() => {
+    saveFavorites(favorites);
+  }, [favorites]);
+
   return (
-    <FavoriteContext.Provider
-      value={value}
-    >
+    <FavoriteContext.Provider value={value}>
       {children}
     </FavoriteContext.Provider>
   );

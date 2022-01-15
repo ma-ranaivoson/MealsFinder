@@ -7,6 +7,7 @@ import TextTypo from '../typography/Text';
 
 interface Props {
   restaurant: Restaurant;
+  isMap: boolean;
 }
 
 const CompactImage = styled.Image`
@@ -29,10 +30,10 @@ const Item = styled.View`
 
 const isAndroid = Platform.OS === 'android';
 
-export default function CompactRestaurantInfo({ restaurant }: Props) {
+export default function CompactRestaurantInfo({ restaurant, isMap }: Props) {
   return (
     <Item>
-      {isAndroid ? (
+      {isAndroid && isMap ? (
         <CompactWebView source={{ uri: restaurant.photos[0] }} />
       ) : (
         <CompactImage source={{ uri: restaurant.photos[0] }} />

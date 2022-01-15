@@ -35,7 +35,7 @@ export default function FavoriteBar({
               <TouchableOpacity
                 onPress={() => onNavigate('RestaurantDetail', { restaurant })}
               >
-                <CompactRestaurantInfo restaurant={restaurant} />
+                <CompactRestaurantInfo restaurant={restaurant} isMap={false} />
               </TouchableOpacity>
             </View>
           );
