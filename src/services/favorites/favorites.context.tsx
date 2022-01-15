@@ -15,7 +15,7 @@ export const FavoriteContext = React.createContext<FavoriteCtx>({
   removeFromFavorites: () => null,
 });
 
-export default function FavoriteContextProvider({
+export function FavoriteContextProvider({
   children,
 }: {
   children: React.ReactNode;

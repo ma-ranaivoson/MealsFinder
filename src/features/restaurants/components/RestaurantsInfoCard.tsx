@@ -6,6 +6,7 @@ import { SvgXml } from 'react-native-svg';
 import star from '../../../../assets/star';
 import open from '../../../../assets/open';
 import TextTypo from '../../../components/typography/Text';
+import Favorite from '../../../components/favorite/Favorite';
 
 export interface Restaurant {
   name: string;
@@ -76,6 +77,7 @@ export default function RestaurantInfoCard({
 
   return (
     <RestaurantCard elevation={6}>
+      <Favorite restaurant={restaurant} />
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <TextTypo variant="label">{name}</TextTypo>
