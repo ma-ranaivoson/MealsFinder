@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import * as firebase from 'firebase';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 // eslint-disable-next-line camelcase
 import { useFonts, Oswald_400Regular } from '@expo-google-fonts/oswald';
@@ -9,8 +10,23 @@ import { ThemeProvider } from 'styled-components/native';
 import { RestaurantContextProvider } from './src/services/restaurants/restaurant.context';
 import { LocationContextProvider } from './src/services/location/location.context';
 import { FavoriteContextProvider } from './src/services/favorites/favorites.context';
+import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
 import theme from './src/infrastructure/theme/theme';
 import Navigation from './src/infrastructure/navigation/Navigation';
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: 'AIzaSyCXFt3r3ohb2fXTq_TnMRXms3BM8IDNs_w',
+  authDomain: 'meals-finder-adf3e.firebaseapp.com',
+  projectId: 'meals-finder-adf3e',
+  storageBucket: 'meals-finder-adf3e.appspot.com',
+  messagingSenderId: '1035594339462',
+  appId: '1:1035594339462:web:d3888eb7bfd57c44f76d07',
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [oswaldLoaded] = useFonts({
@@ -29,13 +45,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavoriteContextProvider>
-          <LocationContextProvider>
-            <RestaurantContextProvider>
-              <Navigation />
-            </RestaurantContextProvider>
-          </LocationContextProvider>
-        </FavoriteContextProvider>
+        <AuthenticationContextProvider>
+          <FavoriteContextProvider>
+            <LocationContextProvider>
+              <RestaurantContextProvider>
+                <Navigation />
+              </RestaurantContextProvider>
+            </LocationContextProvider>
+          </FavoriteContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar hidden={false} />
     </>
