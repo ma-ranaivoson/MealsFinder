@@ -6,7 +6,6 @@ import { ParamListBase } from '@react-navigation/routers';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { RouteProp } from '@react-navigation/core';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SafeArea from '../../components/utility/SafeArea';
 import RestaurantsNavigator from './RestaurantsNavigator';
@@ -52,12 +51,10 @@ const screenOptions = ({
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-        <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Setting" component={Setting} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Setting" component={Setting} />
+    </Tab.Navigator>
   );
 }
