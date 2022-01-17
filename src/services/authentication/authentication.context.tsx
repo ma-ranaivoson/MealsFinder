@@ -7,6 +7,7 @@ interface AuthenticationCtx {
   error: string | null;
   // eslint-disable-next-line no-unused-vars
   onLogin: (email: string, password: string) => void;
+  isAuthenticated: boolean;
 }
 
 export const AuthenticationContext = React.createContext<AuthenticationCtx>({
@@ -15,6 +16,7 @@ export const AuthenticationContext = React.createContext<AuthenticationCtx>({
   error: null,
   // eslint-disable-next-line no-unused-vars
   onLogin: (email: string, password: string) => null,
+  isAuthenticated: false,
 });
 
 export function AuthenticationContextProvider({
@@ -23,6 +25,7 @@ export function AuthenticationContextProvider({
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [user, setUser] = React.useState<object | null>(null);
   const [error, setError] = React.useState<null | string>(null);
 
@@ -32,11 +35,15 @@ export function AuthenticationContextProvider({
       .then((u) => {
         setUser(u);
         setIsLoading(false);
+        setIsAuthenticated(true);
       })
       .catch((e) => {
         const err = e as Error;
         setError(`Error name: ${err.name}\nError message: ${err.message}`);
-        throw new Error(`Error name: ${err.name}\nError message: ${err.message}`);
+        setIsAuthenticated(false);
+        throw new Error(
+          `Error name: ${err.name}\nError message: ${err.message}`,
+        );
       });
   };
 
@@ -45,9 +52,10 @@ export function AuthenticationContextProvider({
       user,
       error,
       isLoading,
+      isAuthenticated,
       onLogin,
     }),
-    [user, error, isLoading, onLogin],
+    [user, error, isLoading, isAuthenticated, onLogin],
   );
 
   return (
