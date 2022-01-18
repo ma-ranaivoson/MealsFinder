@@ -7,6 +7,10 @@ import styled from 'styled-components/native';
 
 const Loader = styled(ActivityIndicator).attrs(() => ({
   color: 'tomato',
-}))``;
+}))`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default Loader;

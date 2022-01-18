@@ -1,4 +1,5 @@
 import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { UserCredential } from '@firebase/auth';
 import { loginRequest, register } from './authentication.service';
@@ -9,7 +10,7 @@ interface AuthenticationCtx {
   error: string | null;
   // eslint-disable-next-line no-unused-vars
   onLogin: (email: string, password: string) => void;
-  isAuthenticated: boolean;
+  isAuthenticated: null | boolean;
   onRegister: (
     // eslint-disable-next-line no-unused-vars
     email: string,
@@ -37,14 +38,40 @@ export function AuthenticationContextProvider({
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState<null | boolean>(null);
   const [user, setUser] = React.useState<UserCredential | null>(null);
   const [error, setError] = React.useState<null | string>(null);
+
+  const setLocalUser = async (u: UserCredential) => {
+    try {
+      const authUser = JSON.stringify(u);
+      await AsyncStorage.setItem('@authenticatedUser', authUser);
+    } catch (e) {
+      throw new Error('There is an error while loading favorites');
+    }
+  };
+
+  const loadLocalUser = async () => {
+    try {
+      const u = await AsyncStorage.getItem('@authenticatedUser');
+      if (!u) {
+        return;
+      }
+      const userLoggedIn = JSON.parse(u) as UserCredential;
+      setUser(userLoggedIn);
+      setIsLoading(false);
+      setIsAuthenticated(true);
+    } catch (e) {
+      setIsAuthenticated(false);
+      setIsLoading(false);
+    }
+  };
 
   const onLogin = (email: string, password: string) => {
     setIsLoading(true);
     loginRequest(email, password)
       .then((u) => {
+        setLocalUser(u);
         setUser(u);
         setIsLoading(false);
         setIsAuthenticated(true);
@@ -81,6 +108,10 @@ export function AuthenticationContextProvider({
         setTimeout(() => setError(null), 5000);
       });
   };
+
+  React.useEffect(() => {
+    loadLocalUser();
+  }, []);
 
   const value = React.useMemo(
     () => ({
