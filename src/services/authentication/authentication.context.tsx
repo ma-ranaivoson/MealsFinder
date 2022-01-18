@@ -1,7 +1,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { UserCredential } from '@firebase/auth';
-import loginRequest from './authentication.service';
+import { loginRequest, register } from './authentication.service';
 
 interface AuthenticationCtx {
   user: UserCredential | null;
@@ -10,6 +10,14 @@ interface AuthenticationCtx {
   // eslint-disable-next-line no-unused-vars
   onLogin: (email: string, password: string) => void;
   isAuthenticated: boolean;
+  onRegister: (
+    // eslint-disable-next-line no-unused-vars
+    email: string,
+    // eslint-disable-next-line no-unused-vars
+    password: string,
+    // eslint-disable-next-line no-unused-vars
+    repeatedPassword: string
+  ) => void;
 }
 
 export const AuthenticationContext = React.createContext<AuthenticationCtx>({
@@ -19,6 +27,8 @@ export const AuthenticationContext = React.createContext<AuthenticationCtx>({
   // eslint-disable-next-line no-unused-vars
   onLogin: (email: string, password: string) => null,
   isAuthenticated: false,
+  // eslint-disable-next-line no-unused-vars
+  onRegister: (email: string, password: string, repeatedPassword: string) => null,
 });
 
 export function AuthenticationContextProvider({
@@ -41,11 +51,34 @@ export function AuthenticationContextProvider({
       })
       .catch((e) => {
         const err = e as Error;
-        setError(`Error name: ${err.name}\nError message: ${err.message}`);
+        setError(`${err.message}`);
         setIsAuthenticated(false);
-        throw new Error(
-          `Error name: ${err.name}\nError message: ${err.message}`,
-        );
+        setIsLoading(false);
+        setTimeout(() => setError(null), 5000);
+      });
+  };
+
+  const onRegister = (
+    email: string,
+    password: string,
+    repeatedPassword: string,
+  ) => {
+    setIsLoading(true);
+    if (password !== repeatedPassword) {
+      setIsLoading(false);
+      setError('Error: Passwords do not match');
+      return;
+    }
+    register(email, password)
+      .then((u) => {
+        setUser(u);
+        setIsLoading(false);
+        setIsAuthenticated(true);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(`${e.message}`);
+        setTimeout(() => setError(null), 5000);
       });
   };
 
@@ -56,8 +89,9 @@ export function AuthenticationContextProvider({
       isLoading,
       isAuthenticated,
       onLogin,
+      onRegister,
     }),
-    [user, error, isLoading, isAuthenticated, onLogin],
+    [user, error, isLoading, isAuthenticated, onLogin, onRegister],
   );
 
   return (

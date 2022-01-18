@@ -4,12 +4,14 @@ import {
   AccountContainer,
   AccountCover,
   AuthButton,
+  Title,
 } from '../components/AccountStyles';
 
 export default function AccountScreen({ navigation }: { navigation: any }) {
   return (
     <AccountBackground>
       <AccountCover />
+      <Title>Meals Finder</Title>
       <AccountContainer>
         <AuthButton
           icon="lock-open-outline"
