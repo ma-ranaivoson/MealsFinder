@@ -1,8 +1,10 @@
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { UserCredential } from '@firebase/auth';
 import loginRequest from './authentication.service';
 
 interface AuthenticationCtx {
-  user: object | null;
+  user: UserCredential | null;
   isLoading: boolean;
   error: string | null;
   // eslint-disable-next-line no-unused-vars
@@ -26,7 +28,7 @@ export function AuthenticationContextProvider({
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-  const [user, setUser] = React.useState<object | null>(null);
+  const [user, setUser] = React.useState<UserCredential | null>(null);
   const [error, setError] = React.useState<null | string>(null);
 
   const onLogin = (email: string, password: string) => {
