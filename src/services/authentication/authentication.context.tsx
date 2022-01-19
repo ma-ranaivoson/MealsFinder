@@ -55,6 +55,8 @@ export function AuthenticationContextProvider({
     try {
       const u = await AsyncStorage.getItem('@authenticatedUser');
       if (!u) {
+        setIsAuthenticated(false);
+        setIsLoading(false);
         return;
       }
       const userLoggedIn = JSON.parse(u) as UserCredential;
