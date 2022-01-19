@@ -7,9 +7,6 @@ import { useFonts, Oswald_400Regular } from '@expo-google-fonts/oswald';
 // eslint-disable-next-line camelcase
 import { Lato_400Regular } from '@expo-google-fonts/lato';
 import { ThemeProvider } from 'styled-components/native';
-import { RestaurantContextProvider } from './src/services/restaurants/restaurant.context';
-import { LocationContextProvider } from './src/services/location/location.context';
-import { FavoriteContextProvider } from './src/services/favorites/favorites.context';
 import { AuthenticationContextProvider } from './src/services/authentication/authentication.context';
 import theme from './src/infrastructure/theme/theme';
 import Navigation from './src/infrastructure/navigation/Navigation';
@@ -44,13 +41,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavoriteContextProvider>
-            <LocationContextProvider>
-              <RestaurantContextProvider>
-                <Navigation />
-              </RestaurantContextProvider>
-            </LocationContextProvider>
-          </FavoriteContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar hidden={false} />

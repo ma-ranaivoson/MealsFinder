@@ -1,11 +1,13 @@
 import React from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { UserCredential } from '@firebase/auth';
+import {
+  UserCredential, getAuth, onAuthStateChanged, User, signOut,
+} from '@firebase/auth';
 import { loginRequest, register } from './authentication.service';
 
 interface AuthenticationCtx {
-  user: UserCredential | null;
+  user: null | User;
+  userCredentials : null | UserCredential;
   isLoading: boolean;
   error: string | null;
   // eslint-disable-next-line no-unused-vars
@@ -19,10 +21,12 @@ interface AuthenticationCtx {
     // eslint-disable-next-line no-unused-vars
     repeatedPassword: string
   ) => void;
+  onSignOut: () => void;
 }
 
 export const AuthenticationContext = React.createContext<AuthenticationCtx>({
   user: null,
+  userCredentials: null,
   isLoading: false,
   error: null,
   // eslint-disable-next-line no-unused-vars
@@ -30,6 +34,7 @@ export const AuthenticationContext = React.createContext<AuthenticationCtx>({
   isAuthenticated: false,
   // eslint-disable-next-line no-unused-vars
   onRegister: (email: string, password: string, repeatedPassword: string) => null,
+  onSignOut: () => null,
 });
 
 export function AuthenticationContextProvider({
@@ -38,43 +43,37 @@ export function AuthenticationContextProvider({
   children: React.ReactNode;
 }) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isAuthenticated, setIsAuthenticated] = React.useState<null | boolean>(null);
-  const [user, setUser] = React.useState<UserCredential | null>(null);
+  const [user, setUser] = React.useState<null | User>(null);
+  const [isAuthenticated, setIsAuthenticated] = React.useState<null | boolean>(
+    null,
+  );
   const [error, setError] = React.useState<null | string>(null);
+  const [userCredentials, setUserCredentials] = React.useState<UserCredential | null>(null);
+  const auth = getAuth();
 
-  const setLocalUser = async (u: UserCredential) => {
-    try {
-      const authUser = JSON.stringify(u);
-      await AsyncStorage.setItem('@authenticatedUser', authUser);
-    } catch (e) {
-      throw new Error('There is an error while loading favorites');
-    }
+  const getCurrentUser = () => {
+    onAuthStateChanged(auth, (u) => {
+      if (u) {
+        setUser(u);
+        setIsAuthenticated(true);
+        setIsLoading(false);
+      } else {
+        setIsAuthenticated(false);
+        setIsLoading(false);
+      }
+    });
   };
 
   const loadLocalUser = async () => {
-    try {
-      const u = await AsyncStorage.getItem('@authenticatedUser');
-      if (!u) {
-        setIsAuthenticated(false);
-        setIsLoading(false);
-        return;
-      }
-      const userLoggedIn = JSON.parse(u) as UserCredential;
-      setUser(userLoggedIn);
-      setIsLoading(false);
-      setIsAuthenticated(true);
-    } catch (e) {
-      setIsAuthenticated(false);
-      setIsLoading(false);
-    }
+    getCurrentUser();
   };
 
   const onLogin = (email: string, password: string) => {
     setIsLoading(true);
     loginRequest(email, password)
       .then((u) => {
-        setLocalUser(u);
-        setUser(u);
+        getCurrentUser();
+        setUserCredentials(u);
         setIsLoading(false);
         setIsAuthenticated(true);
       })
@@ -100,7 +99,8 @@ export function AuthenticationContextProvider({
     }
     register(email, password)
       .then((u) => {
-        setUser(u);
+        getCurrentUser();
+        setUserCredentials(u);
         setIsLoading(false);
         setIsAuthenticated(true);
       })
@@ -111,21 +111,37 @@ export function AuthenticationContextProvider({
       });
   };
 
-  React.useEffect(() => {
-    loadLocalUser();
-  }, []);
+  const onSignOut = () => {
+    setIsLoading(true);
+    signOut(auth).then(() => {
+      setIsLoading(false);
+      setIsAuthenticated(false);
+      setUser(null);
+    }).catch((err) => {
+      setIsLoading(false);
+      setUser(null);
+      setError(`${err.message}`);
+      setIsAuthenticated(false);
+    });
+  };
 
   const value = React.useMemo(
     () => ({
       user,
+      userCredentials,
       error,
       isLoading,
       isAuthenticated,
       onLogin,
       onRegister,
+      onSignOut,
     }),
-    [user, error, isLoading, isAuthenticated, onLogin, onRegister],
+    [user, userCredentials, error, isLoading, isAuthenticated, onLogin, onRegister, onSignOut],
   );
+
+  React.useEffect(() => {
+    loadLocalUser();
+  }, []);
 
   return (
     <AuthenticationContext.Provider value={value}>
