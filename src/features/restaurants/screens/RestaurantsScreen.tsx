@@ -38,11 +38,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const RestaurantList = styled(FlatList).attrs({
+export const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 16,
   },
-})``;
+})`
+  background-color: white;  
+`;
 
 export default function RestaurantsScreen({ navigation }: Props) {
   const { isLoading, restaurants } = useContext(RestaurantContext);
