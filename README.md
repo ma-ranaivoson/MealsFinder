@@ -51,5 +51,5 @@ Find your best meal 🍴🍕
 in production mode, but you can use the latest production <a href="https://expo.dev/accounts/malran/projects/MealsFinder/builds/0a0501fc-e9fb-4046-8124-29c84bed4998">here.</a></p>
 <p>You can always use expo to use the development build, follow this <a href="https://docs.expo.dev/get-started/installation/">documentation.</a></p>
 <strong>Don't forget to leave a star ⭐</strong>
-<strong>You can make a PR too something goes wrong or if you want to add a functionnality😉</strong>
+<strong>You can make a PR too if something goes wrong or if you want to add a functionnality😉</strong>
     
