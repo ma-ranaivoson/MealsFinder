@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "MealsFinder",
+    "name": "Meal Finder",
     "slug": "MealsFinder",
     "version": "0.0.1",
     "orientation": "portrait",
@@ -21,13 +21,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.malran.MealsFinder"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components/native';
-// eslint-disable-next-line object-curly-newline
 import {
   StyleSheet,
   View,
@@ -9,6 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
+import FadeInView from '../../../components/animations/FadeAnimation';
 import Search from '../components/Search';
 import Loader from '../../../components/loader/Loader';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
@@ -43,7 +43,7 @@ export const RestaurantList = styled(FlatList).attrs({
     padding: 16,
   },
 })`
-  background-color: white;  
+  background-color: white;
 `;
 
 export default function RestaurantsScreen({ navigation }: Props) {
@@ -60,10 +60,7 @@ export default function RestaurantsScreen({ navigation }: Props) {
         />
       </View>
       {isToggled && (
-        <FavoriteBar
-          onNavigate={navigation.navigate}
-          favorites={favorites}
-        />
+        <FavoriteBar onNavigate={navigation.navigate} favorites={favorites} />
       )}
       {isLoading ? (
         <Loader size="large" />
@@ -75,7 +72,9 @@ export default function RestaurantsScreen({ navigation }: Props) {
             <TouchableOpacity
               onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
             >
-              <RestaurantInfoCard restaurant={item} />
+              <FadeInView>
+                <RestaurantInfoCard restaurant={item} />
+              </FadeInView>
             </TouchableOpacity>
           )}
           keyExtractor={(item: any) => item.name}
