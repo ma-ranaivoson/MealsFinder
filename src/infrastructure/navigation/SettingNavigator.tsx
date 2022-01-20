@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/stack';
 import SettingScreen from '../../features/setting/screens/SettingScreen';
 import FavoriteScreen from '../../features/setting/screens/FavoriteScreent';
+import CameraScreen from '../../features/setting/screens/CameraScreen';
 
 const SettingStack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function SettingNavigator() {
         component={SettingScreen}
       />
       <SettingStack.Screen name="Favorites" component={FavoriteScreen} />
+      <SettingStack.Screen name="Camera" component={CameraScreen} />
     </SettingStack.Navigator>
   );
 }

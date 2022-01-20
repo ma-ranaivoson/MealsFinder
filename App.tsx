@@ -11,7 +11,7 @@ import { AuthenticationContextProvider } from './src/services/authentication/aut
 import theme from './src/infrastructure/theme/theme';
 import Navigation from './src/infrastructure/navigation/Navigation';
 
-// Initialize Firebase 
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: 'AIzaSyCXFt3r3ohb2fXTq_TnMRXms3BM8IDNs_w',
   authDomain: 'meals-finder-adf3e.firebaseapp.com',

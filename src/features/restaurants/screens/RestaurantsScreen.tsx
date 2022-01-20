@@ -69,13 +69,13 @@ export default function RestaurantsScreen({ navigation }: Props) {
           data={restaurants}
           // eslint-disable-next-line react/no-unused-prop-types
           renderItem={({ item }: { item: any }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
-            >
-              <FadeInView>
+            <FadeInView>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
+              >
                 <RestaurantInfoCard restaurant={item} />
-              </FadeInView>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </FadeInView>
           )}
           keyExtractor={(item: any) => item.name}
         />
