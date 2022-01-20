@@ -1,0 +1,31 @@
+[debug] [2022-01-20T13:53:28.405Z] ----------------------------------------------------------------------
+[debug] [2022-01-20T13:53:28.407Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\rvnir\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2022-01-20T13:53:28.407Z] CLI Version:   10.1.1
+[debug] [2022-01-20T13:53:28.407Z] Platform:      win32
+[debug] [2022-01-20T13:53:28.407Z] Node Version:  v14.17.6
+[debug] [2022-01-20T13:53:28.408Z] Time:          Thu Jan 20 2022 16:53:28 GMT+0300 (East Africa Time)
+[debug] [2022-01-20T13:53:28.408Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-01-20T13:53:28.456Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-20T13:53:28.456Z] > authorizing via signed-in user (rv.nirmalala@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2022-01-20T13:53:28.482Z] [hub] writing locator at C:\Users\rvnir\AppData\Local\Temp\hub-meals-finder-adf3e.json
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[warn] !  Your requested "node" version "14.17.6" doesn't match your global version "14" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"14.17.6\" doesn't match your global version \"14\""}}
+[debug] [2022-01-20T13:53:28.511Z] defaultcredentials: writing to file C:\Users\rvnir\AppData\Roaming\firebase\rv_nirmalala_gmail.com_application_default_credentials.json
+[debug] [2022-01-20T13:53:28.512Z] Setting GAC to C:\Users\rvnir\AppData\Roaming\firebase\rv_nirmalala_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\rvnir\\AppData\\Roaming\\firebase\\rv_nirmalala_gmail.com_application_default_credentials.json"}}
+[debug] [2022-01-20T13:53:28.513Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/meals-finder-adf3e/adminSdkConfig [none]
+[debug] [2022-01-20T13:53:29.139Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/meals-finder-adf3e/adminSdkConfig 200
+[debug] [2022-01-20T13:53:29.140Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/meals-finder-adf3e/adminSdkConfig {"projectId":"meals-finder-adf3e","storageBucket":"meals-finder-adf3e.appspot.com"}
+[debug] [2022-01-20T13:53:29.157Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-01-20T13:53:29.157Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-01-20T13:53:29.157Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\rvnir\\.cache\\firebase\\emulators\\ui-v1.6.4\\server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\rvnir\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.6.4\\\\server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-01-20T13:53:29.263Z] Web / API server started at localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at localhost:4000\n"}}
+[info] i  functions: Watching "E:\Projects\MealsFinder\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"E:\\Projects\\MealsFinder\\functions\" for Cloud Functions..."}}
+[debug] [2022-01-20T13:53:29.436Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2022-01-20T13:53:29.437Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2022-01-20T13:53:29.438Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2022-01-20T13:53:29.438Z] [worker-~diagnostic~-4b8db446-a004-496f-8e84-83707de99427]: Assigning socketPath: \\?\pipe\E:\Projects\MealsFinder\functions\17412 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-4b8db446-a004-496f-8e84-83707de99427]: Assigning socketPath: \\\\?\\pipe\\E:\\Projects\\MealsFinder\\functions\\17412"}}
+[debug] [2022-01-20T13:53:29.439Z] [worker-~diagnostic~-4b8db446-a004-496f-8e84-83707de99427]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-4b8db446-a004-496f-8e84-83707de99427]: BUSY"}}
