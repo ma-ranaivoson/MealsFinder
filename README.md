@@ -48,10 +48,13 @@ Find your best meal 🍴🍕
     <li><a href="https://eslint.org/">ESLint with airbnb config</a></li>
   </ul>
   
-<h1>Application</h1>
-<p>The production build app (the map section) is not stable yet due to react native map which needs an API key (working on that now...)
-in production mode, but you can use the latest production <a href="https://expo.dev/accounts/malran/projects/MealsFinder/builds/0a0501fc-e9fb-4046-8124-29c84bed4998">here.</a></p>
-<p>You can always use expo to use the development build, follow this <a href="https://docs.expo.dev/get-started/installation/">documentation.</a></p>
+<h1>How to run it?</h1>
+<ul>
+  <li>Download expo go <a href="https://expo.dev/client">here</a></li>
+  <li>Copy the following string: <code>exp://exp.host/@malran/MealsFinder</code></li>
+  <li>Open expo go and you should see below "Scan QR Code"  a prompt "Open from clipboard", click on it.</li>
+  <li>You can navigate :)</li>
+</ul>
 <strong>Don't forget to leave a star ⭐</strong>
 <strong>You can make a PR too if something goes wrong or if you want to add a functionnality😉</strong>
     

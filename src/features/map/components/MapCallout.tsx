@@ -7,5 +7,5 @@ interface Props {
 }
 
 export default function MapCallout({ restaurant }: Props) {
-  return <CompactRestaurantInfo restaurant={restaurant} />;
+  return <CompactRestaurantInfo restaurant={restaurant} isMap />;
 }
