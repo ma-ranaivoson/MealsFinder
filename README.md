@@ -24,7 +24,6 @@ Find your best meal 🍴🍕
   <ul>
     <li>TypeScript</li>
     <li>JavaScript</li>
-    <li>Java</li>
   </ul>
   <li>React Native</li>
   <ul>
@@ -47,7 +46,8 @@ Find your best meal 🍴🍕
   <ul>
     <li><a href="https://eslint.org/">ESLint with airbnb config</a></li>
   </ul>
-  
+</ul>
+
 <h1>How to run it?</h1>
 <ul>
   <li>Download expo go <a href="https://expo.dev/client">here</a></li>
