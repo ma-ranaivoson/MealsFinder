@@ -1,4 +1,4 @@
-name: build-preview-apk
+name: build and publish
 on: [push]
 env:
   expo_password: ${{ secrets.EXPO_PASSWORD }}
@@ -34,7 +34,6 @@ jobs:
           restore-keys: |
               ${{ runner.os }}-yarn-
       - run: npm install --global expo-cli
-      - run: npm install -g eas-cli
       - run: npm install --global yarn
       - run: yarn install
       - run: expo login -u $expo_login -p $expo_password
