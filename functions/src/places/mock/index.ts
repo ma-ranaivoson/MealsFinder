@@ -1,14 +1,13 @@
-import antwerp from './antwerp.json';
-import chicago from './chicago.json';
-import toronto from './toronto.json';
-// eslint-disable-next-line camelcase
-import san_francisco from './san_francisco.json';
+/* eslint-disable camelcase */
+import antwerp from './antwerp';
+import chicago from './chicago';
+import san_francisco from './san_francisco';
+import toronto from './toronto';
 
-export const mocks = {
+export const mocks : any = {
   '51.219448,4.402464': antwerp,
   '43.653225,-79.383186': toronto,
   '41.878113,-87.629799': chicago,
-  // eslint-disable-next-line camelcase
   '37.7749295,-122.4194155': san_francisco,
 };
 
@@ -21,3 +20,9 @@ export const mockImages = [
   'https://www.foodiesfeed.com/wp-content/uploads/2019/02/messy-pizza-on-a-black-table-600x400.jpg',
   'https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg',
 ];
+
+export function addMockImages(restaurant: { photos: number[]; }) {
+  // eslint-disable-next-line no-param-reassign
+  restaurant.photos = [Math.ceil(Math.random() * (mockImages.length - 1))];
+  return restaurant;
+}

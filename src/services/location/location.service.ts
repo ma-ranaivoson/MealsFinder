@@ -1,42 +1,38 @@
-import { locations } from './location.mock';
-
 interface Geometry {
   geometry: {
     location: {
-      lng: number,
-      lat: number,
-    },
+      lng: number;
+      lat: number;
+    };
     viewport: {
       northeast: {
-        lat: number,
-        lng: number
-      },
+        lat: number;
+        lng: number;
+      };
       southwest: {
-        lat: number,
-        lng: number,
-      },
-    }
-  }
+        lat: number;
+        lng: number;
+      };
+    };
+  };
 }
 
 export interface LocationType {
-  name: string,
-  results: Geometry[]
+  name: string;
+  results: Geometry[];
 }
 
 const camelize = require('camelize');
 
 export function locationRequest(searchTerm: string) {
-  return new Promise((resolve, reject) => {
-    const locationMock = locations.filter((loc) => loc.name === searchTerm);
-
-    if (locationMock.length === 0) {
-      // eslint-disable-next-line prefer-promise-reject-errors
-      reject('Not found');
-    } else {
-      resolve(locationMock[0]);
-    }
-  });
+  return fetch(
+    `http://localhost:5001/meals-finder-adf3e/us-central1/geocode?city=${searchTerm}`,
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      const e = err as Error;
+      throw new Error(`${e.message}`);
+    });
 }
 
 export function locationTransform(res: LocationType) {

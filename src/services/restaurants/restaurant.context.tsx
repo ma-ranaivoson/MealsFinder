@@ -28,18 +28,17 @@ export function RestaurantContextProvider({ children }: Props) {
 
   const retreiveRestaurants = (loc: string) => {
     setIsLoading(true);
-    setTimeout(() => {
-      restaurantRequest(loc)
-        .then(restaurantTransform)
-        .then((res) => {
-          setIsLoading(false);
-          setRestaurants(res);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          setError(err);
-        });
-    }, 2000);
+
+    restaurantRequest(loc)
+      .then(restaurantTransform)
+      .then((res) => {
+        setIsLoading(false);
+        setRestaurants(res);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        setError(err);
+      });
   };
 
   useEffect(() => {

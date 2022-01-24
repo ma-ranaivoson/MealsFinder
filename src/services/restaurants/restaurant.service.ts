@@ -1,18 +1,16 @@
-import { mocks, mockImages } from './mock';
+import { mockImages } from '../../../functions/src/places/mock';
 
 const camelize = require('camelize');
 
 export function restaurantRequest(location: string) {
-  return new Promise((resolve, reject) => {
-    // @ts-ignore: Unreachable code error
-    const mock = mocks[location];
-
-    // eslint-disable-next-line prefer-promise-reject-errors
-    if (!mock) reject('not found');
-    if (mock) {
-      resolve(mock);
-    }
-  });
+  return fetch(
+    `http://localhost:5001/meals-finder-adf3e/us-central1/placesNearby?location=${location}`,
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      const e = err as Error;
+      throw new Error(`${e.message}`);
+    });
 }
 
 export function restaurantTransform({
