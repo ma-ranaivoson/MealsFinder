@@ -1,9 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import {
-  locationRequest,
-  locationTransform,
-  LocationType,
-} from './location.service';
+import { locationTransform, LocationType } from './location.service';
 
 interface Props {
   children: React.ReactNode;
@@ -33,25 +29,26 @@ export const LocationContext = createContext<LocationCtx>({
 
 export function LocationContextProvider({ children }: Props) {
   const [location, setLocation] = useState<Location | null>(null);
-  const [keyword, setKeyword] = useState<string>('San Francisco');
+  const [keyword, setKeyword] = useState<string>('Toronto');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const onSearch = (searchKeyword: string) => {
+  const onSearch = async (searchKeyword: string) => {
     setIsLoading(true);
     setKeyword(searchKeyword);
 
     if (!searchKeyword.length) return;
 
-    locationRequest(searchKeyword.toLowerCase())
-      .then((res) => {
-        const loc = res as LocationType;
+    fetch(
+      `https://us-central1-meals-finder-adf3e.cloudfunctions.net/geocode?city=${searchKeyword.toLocaleLowerCase()}`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const loc = data as LocationType;
         const locTransformed = locationTransform(loc);
-        return locTransformed;
-      })
-      .then((res) => {
-        setLocation(res);
+        setLocation(locTransformed);
         setIsLoading(false);
+        return locTransformed;
       })
       .catch((err) => {
         setError(err);

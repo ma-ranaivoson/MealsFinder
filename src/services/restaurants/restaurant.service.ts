@@ -1,10 +1,11 @@
-import { mockImages } from '../../../functions/src/places/mock';
+// eslint-disable-next-line import/no-relative-packages
+import { mockImages } from '../../../functions/lib/places/mock';
 
 const camelize = require('camelize');
 
 export function restaurantRequest(location: string) {
   return fetch(
-    `http://localhost:5001/meals-finder-adf3e/us-central1/placesNearby?location=${location}`,
+    `https://us-central1-meals-finder-adf3e.cloudfunctions.net/placesNearby?location=${location}`,
   )
     .then((res) => res.json())
     .catch((err) => {
