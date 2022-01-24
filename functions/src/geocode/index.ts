@@ -1,12 +1,12 @@
 import * as functions from 'firebase-functions';
-import { locations as locationsMock } from './location.mock';
+import locations from './location.mock';
 
 const url = require('url');
 
 const geocodeRequest = functions.https.onRequest((request, response) => {
   const { query } = url.parse(request.url, true);
   const { city } = query;
-  const res = locationsMock.find((loc) => loc.name === city.toLowerCase());
+  const res = locations[city];
   response.json(res?.results);
 });
 
