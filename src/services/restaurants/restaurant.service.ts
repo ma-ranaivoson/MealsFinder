@@ -1,12 +1,12 @@
+/* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-relative-packages
 import { mockImages } from '../../../functions/lib/places/mock';
+import { host } from '../../utils/env';
 
 const camelize = require('camelize');
 
 export function restaurantRequest(location: string) {
-  return fetch(
-    `https://us-central1-meals-finder-adf3e.cloudfunctions.net/placesNearby?location=${location}`,
-  )
+  return fetch(`${host}/placesNearby?location=${location}`)
     .then((res) => res.json())
     .catch((err) => {
       const e = err as Error;
@@ -18,7 +18,6 @@ export function restaurantTransform({
   results,
 }: any): string | PromiseLike<string> {
   const mappedResults = results.map((restaurant: unknown | any) => {
-    // eslint-disable-next-line no-param-reassign
     restaurant.photos = restaurant.photos.map(
       () => mockImages[Math.ceil(Math.random() * (mockImages.length - 1))],
     );

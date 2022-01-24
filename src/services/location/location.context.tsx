@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { locationTransform, LocationType } from './location.service';
+import { host } from '../../utils/env';
 
 interface Props {
   children: React.ReactNode;
@@ -39,9 +40,7 @@ export function LocationContextProvider({ children }: Props) {
 
     if (!searchKeyword.length) return;
 
-    fetch(
-      `https://us-central1-meals-finder-adf3e.cloudfunctions.net/geocode?city=${searchKeyword.toLocaleLowerCase()}`,
-    )
+    fetch(`${host}/geocode?city=${searchKeyword.toLocaleLowerCase()}`)
       .then((response) => response.json())
       .then((data) => {
         const loc = data as LocationType;
@@ -63,7 +62,7 @@ export function LocationContextProvider({ children }: Props) {
   const value = React.useMemo(
     // eslint-disable-next-line object-curly-newline
     () => ({ isLoading, error, location, search: onSearch, keyword }),
-    [isLoading, error, location, keyword],
+    [isLoading, error, location, keyword, onSearch],
   );
 
   return (
