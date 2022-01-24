@@ -4,6 +4,7 @@ Find your best meal 🍴🍕
 <h1>What is this application?</h1>
 <p>This application is a demo of my knowledge of react native. You can find some restaurants from <strong>Chicago, Antwerp, San Fransisco and Torronto</strong>.</p>
 <p><strong>/!\ This application uses mock data which simulates a real API call that's why you can only get the result of those four regions while searching in the map search bar./!\</strong></p>
+<p><strong>Working to make it fully functionnal with google map now.</strong></p>
 
 <h1>Functionalities </h1>
 <ul>
