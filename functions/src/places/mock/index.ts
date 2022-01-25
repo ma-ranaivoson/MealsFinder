@@ -21,7 +21,7 @@ export const mockImages = [
   'https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-ready-for-baking-600x400.jpg',
 ];
 
-export function addMockImages(restaurant: { photos: number[]; }) {
+export function addMockImages(restaurant: any) {
   // eslint-disable-next-line no-param-reassign
   restaurant.photos = [Math.ceil(Math.random() * (mockImages.length - 1))];
   return restaurant;

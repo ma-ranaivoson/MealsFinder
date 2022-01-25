@@ -30,7 +30,7 @@ export const LocationContext = createContext<LocationCtx>({
 
 export function LocationContextProvider({ children }: Props) {
   const [location, setLocation] = useState<Location | null>(null);
-  const [keyword, setKeyword] = useState<string>('Toronto');
+  const [keyword, setKeyword] = useState<string>('Itaosy');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -40,7 +40,7 @@ export function LocationContextProvider({ children }: Props) {
 
     if (!searchKeyword.length) return;
 
-    fetch(`${host}/geocode?city=${searchKeyword.toLocaleLowerCase()}`)
+    fetch(`${host}/geocode?city=${searchKeyword.toLowerCase()}&mock=false`)
       .then((response) => response.json())
       .then((data) => {
         const loc = data as LocationType;

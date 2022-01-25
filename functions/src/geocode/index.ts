@@ -1,5 +1,6 @@
 import { Client } from '@googlemaps/google-maps-services-js';
 import * as functions from 'firebase-functions';
+import { google } from '../env/env';
 import locations from './location.mock';
 
 const url = require('url');
@@ -21,15 +22,16 @@ const geocodeRequest = async (
     const res = await client.geocode({
       params: {
         address: city,
-        key: '',
+        key: google.apiKey,
       },
       timeout: 2000,
     });
     const { data } = res;
 
     return response.json(data);
-  } catch (err: any) {
-    return response.status(400).send(err.response.data.error_message);
+  } catch (err) {
+    const e = err as any;
+    return response.status(400).send(e.response.data.error_message);
   }
 };
 
