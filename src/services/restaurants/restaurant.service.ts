@@ -1,6 +1,4 @@
-/* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/no-relative-packages
-import { mockImages } from '../../../functions/lib/places/mock';
+import { mockImages } from './mock';
 import { host } from '../../utils/env';
 
 const camelize = require('camelize');
@@ -18,6 +16,7 @@ export function restaurantTransform({
   results,
 }: any): string | PromiseLike<string> {
   const mappedResults = results.map((restaurant: unknown | any) => {
+    // eslint-disable-next-line no-param-reassign
     restaurant.photos = restaurant.photos.map(
       () => mockImages[Math.ceil(Math.random() * (mockImages.length - 1))],
     );

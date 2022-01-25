@@ -5,23 +5,25 @@ import { mocks, addMockImages } from './mock';
 
 const url = require('url');
 
-const addGoogleImage = (restaurant: any) => {
-  const ref = restaurant.photos[0].photo_reference;
+// const addGoogleImage = (restaurant: any) => {
+//   const ref = restaurant.photos[0].photo_reference;
 
-  if (!ref) {
-    // eslint-disable-next-line no-param-reassign
-    restaurant.photos = [
-      'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
-    ];
+//   if (!ref) {
+//     // eslint-disable-next-line no-param-reassign
+//     restaurant.photos = [
+//       'https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg',
+//     ];
 
-    return restaurant;
-  }
+//     return restaurant;
+//   }
 
-  // eslint-disable-next-line no-param-reassign
-  restaurant.photo = [`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${ref}&key=${google.apiKey}`];
+//   // eslint-disable-next-line no-param-reassign
+//   restaurant.photo = [
+//     `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${ref}&key=${google.apiKey}`,
+//   ];
 
-  return restaurant;
-};
+//   return restaurant;
+// };
 
 const placesRequest = async (
   request: functions.https.Request,
@@ -49,10 +51,10 @@ const placesRequest = async (
         type: 'restaurant',
         key: google.apiKey,
       },
-      timeout: 2000,
+      timeout: 1000,
     });
     const { data } = res;
-    data.results = data.results.map(addGoogleImage);
+    data.results = data.results.map(addMockImages);
 
     return response.json(data);
   } catch (err) {

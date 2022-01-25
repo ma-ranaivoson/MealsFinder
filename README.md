@@ -2,16 +2,14 @@
 Find your best meal 🍴🍕
 
 <h1>What is this application?</h1>
-<p>This application is a demo of my knowledge of react native. You can find some restaurants from <strong>Chicago, Antwerp, San Fransisco and Torronto</strong>.</p>
-<p><strong>/!\ This application uses mock data which simulates a real API call that's why you can only get the result of those four regions while searching in the map search bar./!\</strong></p>
-<p><strong>Working to make it fully functionnal with google map now.</strong></p>
+<p>This application is a demo of my knowledge of react native. You can find restaurants that are registered to google map API.</p>
 
 <h1>Functionalities </h1>
 <ul>
   <li>Login</li>
   <li>Register</li>
   <li>Restaurants list</li>
-  <li>Restaurant menu (Static)</li>
+  <li>Restaurant menu (Static, not listed in google map place api)</li>
   <li>Camera to take profile picture</li>
   <li>Favorites</li>
   <li>Map that marks all subscribed restaurants in a given region (Chicago, Antwerp, San Fransisco and Torronto)</li>
@@ -31,8 +29,8 @@ Find your best meal 🍴🍕
     <li><a href="https://docs.expo.dev/">Expo</a></li>
     <li><a href="https://styled-components.com/">Styled Component</a></li>
     <li><a href="https://reactnavigation.org/">React Navigation</a></li>
-    <li><a href="https://docs.expo.dev/versions/latest/sdk/map-view/">React Native MapView</a></li>
-    <li><a href="https://reactnativepaper.com/">React Native Paper</a></li>
+     <li><a href="https://reactnativepaper.com/">React Native Paper</a></li>
+    <li><a href="https://developers.google.com/maps">Google map</a></li>   
     <li><a href="https://github.com/lottie-react-native/lottie-react-native">Lottie</a></li>
   </ul>
   <li>CI/CD</li>
