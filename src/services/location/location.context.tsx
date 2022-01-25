@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { locationTransform, LocationType } from './location.service';
-import { host } from '../../utils/env';
+import { host, isMock } from '../../utils/env';
 
 interface Props {
   children: React.ReactNode;
@@ -40,13 +40,14 @@ export function LocationContextProvider({ children }: Props) {
 
     if (!searchKeyword.length) return;
 
-    fetch(`${host}/geocode?city=${searchKeyword.toLowerCase()}&mock=false`)
+    fetch(`${host}/geocode?city=${searchKeyword.toLowerCase()}&mock=${isMock}`)
       .then((response) => response.json())
       .then((data) => {
         const loc = data as LocationType;
         const locTransformed = locationTransform(loc);
         setLocation(locTransformed);
         setIsLoading(false);
+        setError(null);
         return locTransformed;
       })
       .catch((err) => {

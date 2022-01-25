@@ -17,6 +17,13 @@ const AnimationWrapper = styled.View`
   top: 30px;
 `;
 
+const CopyrightContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+`;
+
+const CopyrightText = styled.Text``;
+
 export default function AccountScreen({ navigation }: { navigation: any }) {
   return (
     <AccountBackground>
@@ -47,6 +54,9 @@ export default function AccountScreen({ navigation }: { navigation: any }) {
           Register
         </AuthButton>
       </AccountContainer>
+      <CopyrightContainer>
+        <CopyrightText>ⒸMa Ranaivoson 2022</CopyrightText>
+      </CopyrightContainer>
     </AccountBackground>
   );
 }

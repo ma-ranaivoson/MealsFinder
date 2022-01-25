@@ -29,8 +29,8 @@ export default function RestaurantDetailScreen({ route }: any) {
           onPress={() => setBreakfastExpanded(!breakfastExpanded)}
           titleStyle={{ color: breakfastExpanded ? 'tomato' : '#262626' }}
         >
-          <List.Item title="Eggs Benedict" />
-          <List.Item title="Classic breakfast" />
+          <List.Item title="Coffee with milk" />
+          <List.Item title="Vary amin'anana" />
         </List.Accordion>
 
         <List.Accordion
@@ -45,9 +45,9 @@ export default function RestaurantDetailScreen({ route }: any) {
           onPress={() => setLunchExpanded(!lunchExpanded)}
           titleStyle={{ color: lunchExpanded ? 'tomato' : '#262626' }}
         >
-          <List.Item title="Burger with fries" />
+          <List.Item title="Vary sy tsaramaso" />
           <List.Item title="Steak sandwich" />
-          <List.Item title="Mushroom soup" />
+          <List.Item title="Hamburger" />
         </List.Accordion>
 
         <List.Accordion
@@ -64,7 +64,7 @@ export default function RestaurantDetailScreen({ route }: any) {
         >
           <List.Item title="Soup" />
           <List.Item title="Spaghetti" />
-          <List.Item title="Rice" />
+          <List.Item title="Vary sosoa" />
         </List.Accordion>
 
         <List.Accordion
@@ -81,7 +81,7 @@ export default function RestaurantDetailScreen({ route }: any) {
         >
           <List.Item title="Coca cola" />
           <List.Item title="Fanta" />
-          <List.Item title="Lemon juice" />
+          <List.Item title="Orange Juice" />
         </List.Accordion>
       </ScrollView>
     </SafeArea>

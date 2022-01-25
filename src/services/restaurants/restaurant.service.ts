@@ -1,10 +1,10 @@
 import { mockImages } from './mock';
-import { host } from '../../utils/env';
+import { host, isMock } from '../../utils/env';
 
 const camelize = require('camelize');
 
 export function restaurantRequest(location: string) {
-  return fetch(`${host}/placesNearby?location=${location}`)
+  return fetch(`${host}/placesNearby?location=${location}&mock=${isMock}`)
     .then((res) => res.json())
     .catch((err) => {
       const e = err as Error;

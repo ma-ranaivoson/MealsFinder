@@ -49,4 +49,5 @@ export const TextError = styled.Text`
   color: red;
   margin: 0 0 8px 0;
   max-width: 250px;
+  font-family: Oswald_400Regular;
 `;

@@ -13,13 +13,22 @@ import Search from '../components/Search';
 import Loader from '../../../components/loader/Loader';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
 import SafeArea from '../../../components/utility/SafeArea';
+import { TextError } from '../../account/components/AccountStyles';
 import { RestaurantContext } from '../../../services/restaurants/restaurant.context';
 import { FavoriteContext } from '../../../services/favorites/favorites.context';
+import { LocationContext } from '../../../services/location/location.context';
 import FavoriteBar from '../../../components/favorite/FavoriteBar';
 
 interface Props {
   navigation: any;
 }
+
+const CenteredError = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+`;
 
 const isAndroid = Platform.OS === 'android';
 
@@ -47,9 +56,33 @@ export const RestaurantList = styled(FlatList).attrs({
 `;
 
 export default function RestaurantsScreen({ navigation }: Props) {
-  const { isLoading, restaurants } = useContext(RestaurantContext);
+  const {
+    isLoading,
+    restaurants,
+    error: restaurantError,
+  } = useContext(RestaurantContext);
+  const { error: locationError } = useContext(LocationContext);
   const { favorites } = useContext(FavoriteContext);
   const [isToggled, setIsToggled] = React.useState(false);
+
+  const contentShow = isLoading ? (
+    <Loader size="large" />
+  ) : (
+    <RestaurantList
+      data={restaurants}
+      // eslint-disable-next-line react/no-unused-prop-types
+      renderItem={({ item }: { item: any }) => (
+        <FadeInView>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
+          >
+            <RestaurantInfoCard restaurant={item} />
+          </TouchableOpacity>
+        </FadeInView>
+      )}
+      keyExtractor={(item: any) => item.name}
+    />
+  );
 
   return (
     <SafeArea>
@@ -62,23 +95,12 @@ export default function RestaurantsScreen({ navigation }: Props) {
       {isToggled && (
         <FavoriteBar onNavigate={navigation.navigate} favorites={favorites} />
       )}
-      {isLoading ? (
-        <Loader size="large" />
+      {locationError && restaurantError ? (
+        <CenteredError>
+          <TextError style={{ fontSize: 25 }}>No Restaurant Found</TextError>
+        </CenteredError>
       ) : (
-        <RestaurantList
-          data={restaurants}
-          // eslint-disable-next-line react/no-unused-prop-types
-          renderItem={({ item }: { item: any }) => (
-            <FadeInView>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('RestaurantDetail', { restaurant: item })}
-              >
-                <RestaurantInfoCard restaurant={item} />
-              </TouchableOpacity>
-            </FadeInView>
-          )}
-          keyExtractor={(item: any) => item.name}
-        />
+        contentShow
       )}
     </SafeArea>
   );
