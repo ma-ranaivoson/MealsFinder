@@ -1,10 +1,18 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { List } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
+import styled from 'styled-components/native';
 import SafeArea from '../../../components/utility/SafeArea';
 import RestaurantInfoCard from '../components/RestaurantsInfoCard';
+
+const OrderContainer = styled.View`
+  background-color: rgba(255, 255, 255, 0);
+`;
+const OrderButton = styled(Button)`
+  margin: 0 auto;
+`;
 
 export default function RestaurantDetailScreen({ route }: any) {
   const { restaurant } = route.params;
@@ -83,6 +91,7 @@ export default function RestaurantDetailScreen({ route }: any) {
           <List.Item title="Fanta" />
           <List.Item title="Orange Juice" />
         </List.Accordion>
+        <OrderButton mode="contained">Order your meal</OrderButton>
       </ScrollView>
     </SafeArea>
   );

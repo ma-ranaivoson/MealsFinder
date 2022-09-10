@@ -16,8 +16,10 @@ function CreditCardComponent() {
       cvc,
     };
 
-    const info = await cardTokenRequest(card);
-    console.log(info);
+    if (!isIncomplete) {
+      const info = await cardTokenRequest(card);
+      console.log(info);
+    }
   };
 
   return <CreditCardInput onChange={handleChange} autoFocus />;
