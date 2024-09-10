@@ -12,7 +12,7 @@ Find your best meal 🍴🍕
   <li>Restaurant menu (Static, not listed in google map place api)</li>
   <li>Camera to take profile picture</li>
   <li>Favorites</li>
-  <li>Map that marks all subscribed restaurants in a given region (Chicago, Antwerp, San Fransisco and Torronto)</li>
+  <li>Map that marks all subscribed restaurants in a given region</li>
   <li>Setting</li>
   <li>Logout</li>
 </ul>
